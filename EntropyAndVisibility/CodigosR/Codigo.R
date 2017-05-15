@@ -17,15 +17,17 @@ Read_txt<-function(name,column){
   return(data)
 }
 
-EntropyData<-function(matriz){
-  entropyShannonInter = rep(0,dim(matriz)[1])
+EntropyComplexityData<-function(matriz){
+  entropyShannonInter = complexidade = rep(0,dim(matriz)[1])
   for(i in 1:dim(matriz)[1]){
     a = matriz[i,1:length(matriz[i,])]
     a = a[a!=0]
     aa = hist(a)
     entropyShannonInter[i] = shannonEntropyNormalized(aa$density)
+    complexidade[i] = C(aa$density)
   }
   write.csv(entropyShannonInter,file = "entropy")
+  write.csv(complexidade,file = "Complexidade")
 }
 
 partitionMPR<-function(matriz,dimension,delay){
